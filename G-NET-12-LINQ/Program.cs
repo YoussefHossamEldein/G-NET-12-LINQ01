@@ -1,4 +1,5 @@
 ﻿using LINQ.DataSources;
+using LINQ.Models;
 using static LINQ.DataSources.Source;
 
 
@@ -59,39 +60,7 @@ namespace G_NET_12_LINQ
 
             #region Question06
 
-            //var result = from p in ProductList
-            //             where p.UnitsInStock > 0 && p.Category == "Condiments"
-            //             select p.UnitPrice;
-
-
-            //var result = ProductList.Take(5);
-
-            //var result = ProductList.Skip(10).Take(10);
-            int[] numbers = { 5, 4, 3, 1, 6, 9, 2, 8 };
-
-            //var result = numbers.TakeWhile(n => n < 6);
-
-            //var result = numbers.TakeWhile((n, i) => n >= i);
-
-            //var result = numbers.TakeWhile(n => n % 3 == 0);
-            //var result = ProductList.Any(n => n.UnitsInStock == 0);
-
-
-            //var result = ProductList.Where(n => n.Category == "Seafood").All(n => n.UnitsInStock > 0);
-            //Console.WriteLine(result);
-
-
-            var result = from p in ProductList
-                         let DiscountPrice = p.UnitPrice * 0.5M
-                         where DiscountPrice < 10
-                         select new
-                         {
-                             p.ProductName,
-                             p.UnitPrice,
-                             PriceAfterDiscount = p.UnitPrice * 0.5M
-                         };
-
-            
+            var result = ProductList.Select(p => new { p.ProductName, p.UnitPrice, StockStatus = p.UnitsInStock > 0 ? "Available" : "Out of stock" });
             foreach (var item in result)
             {
                 Console.WriteLine(item);
@@ -99,24 +68,47 @@ namespace G_NET_12_LINQ
             #endregion
 
             #region Question07
+            //var result = ProductList.Select((n, i) => new {i,n.ProductName});
+
             #endregion
 
             #region Question08
+            //var result = ProductList.OrderBy(p => p.Category).ThenByDescending(p => p.UnitPrice);
             #endregion
 
             #region Question09
+
+            //var result = ProductList.Where(p => p.Category == "Beverges").OrderByDescending(p => p.UnitsInStock)
+            //    .Select(p=>  p.ProductName);
             #endregion
 
             #region Question10
+
+            //var result = from c in CustomerList
+            //             from o in c.Orders
+            //             where o.OrderDate.Year > 1997
+            //             select new { c.CustomerID, o.OrderDate };
+
+
             #endregion
 
             #region Question11
+
+            //var result = ProductList.Select((p,i) => new {position=i+1,p.ProductName});
+
             #endregion
 
             #region Question12
+
+            //String[] Arr = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+
+            //var result = Arr.OrderByDescending(a => a.Length);
             #endregion
 
             #region Question13
+            //String[] Arr = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
+            //var result = Arr.Where(x => char.ToLower(x[1]) == 'i').Reverse(); 
+
             #endregion
 
 
